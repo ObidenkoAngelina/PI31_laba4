@@ -62,4 +62,56 @@ class Grid {
         }
     }
 
+    public void insertNumber(Scanner scanner) {
+        int row, col, number;
+
+        // Запрос ввода номера строки
+        System.out.print("Введите номер строки (0-8): ");
+        row = scanner.nextInt();
+
+        // Запрос ввода номера колонки
+        System.out.print("Введите номер колонки (0-8): ");
+        col = scanner.nextInt();
+
+        // Проверка корректности введенных индексов
+        if (row < 0 || row >= SIZE || col < 0 || col >= SIZE) {
+            System.out.println("Некорректный выбор ячейки.");
+            return;
+        }
+
+        // Проверка, открыта ли ячейка
+        if (visible[row][col]) {
+            System.out.println("Эта ячейка уже открыта.");
+            return;
+        }
+
+        // Запрос ввода числа
+        System.out.print("Введите число (1-9): ");
+        number = scanner.nextInt();
+
+        // Проверка на корректность введенного числа
+        if (number < 1 || number > 9) {
+            System.out.println("Неверное число. Пожалуйста, введите число от 1 до 9.");
+            return;
+        }
+
+        // Сравнение введенного числа с фактическим значением ячейки
+        if (cells[row][col] == '0' + number) {
+            visible[row][col] = true; // Открываем ячейку
+            System.out.println("Правильное число! Ячейка открыта.");
+        } else {
+            System.out.println("Неправильное число!");
+        }
+    }
+
+    public boolean allCellsVisible() {
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
+                if (!visible[row][col]) {
+                    return false; // Если найдена закрытая ячейка
+                }
+            }
+        }
+        return true; // Все ячейки открыты
+    }
 }

@@ -12,5 +12,11 @@ public class main {
             dynamicGrid.hideNumbers(row);
         }
         dynamicGrid.printGrid();
+
+        Player player = new Player(dynamicGrid, playerName);
+        long startTime = System.currentTimeMillis(); // Запоминаем время начала
+        player.play(startTime);
+
+        scanner.close();
     }
 }
