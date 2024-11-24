@@ -1,5 +1,6 @@
 import java.util.Random;
 import java.util.Scanner;
+import java.util.InputMismatchException;
 class Grid {
     public static final int SIZE = 9;
     private char[][] cells = new char[SIZE][SIZE];
@@ -71,42 +72,49 @@ class Grid {
     public void insertNumber(Scanner scanner) {
         int row, col, number;
 
-        // Запрос ввода номера строки
-        System.out.print("Введите номер строки (0-8): ");
-        row = scanner.nextInt();
+        try {
+            // Запрос ввода номера строки
+            System.out.print("Введите номер строки (0-8): ");
+            row = scanner.nextInt();
 
-        // Запрос ввода номера колонки
-        System.out.print("Введите номер колонки (0-8): ");
-        col = scanner.nextInt();
+            // Запрос ввода номера колонки
+            System.out.print("Введите номер колонки (0-8): ");
+            col = scanner.nextInt();
 
-        // Проверка корректности введенных индексов
-        if (row < 0 || row >= SIZE || col < 0 || col >= SIZE) {
-            System.out.println("Некорректный выбор ячейки.");
-            return;
-        }
+            // Проверка корректности введенных индексов
+            if (row < 0 || row >= SIZE || col < 0 || col >= SIZE) {
+                throw new IllegalArgumentException("Некорректный выбор ячейки.");
+            }
 
-        // Проверка, открыта ли ячейка
-        if (visible[row][col]) {
-            System.out.println("Эта ячейка уже открыта.");
-            return;
-        }
+            // Проверка, открыта ли ячейка
+            if (visible[row][col]) {
+                System.out.println("Эта ячейка уже открыта.");
+                return;
+            }
 
-        // Запрос ввода числа
-        System.out.print("Введите число (1-9): ");
-        number = scanner.nextInt();
+            // Запрос ввода числа
+            System.out.print("Введите число (1-9): ");
+            number = scanner.nextInt();
 
-        // Проверка на корректность введенного числа
-        if (number < 1 || number > 9) {
-            System.out.println("Неверное число. Пожалуйста, введите число от 1 до 9.");
-            return;
-        }
+            // Проверка на корректность введенного числа
+            if (number < 1 || number > 9) {
+                throw new IllegalArgumentException("Неверное число. Пожалуйста, введите число от 1 до 9.");
+            }
 
-        // Сравнение введенного числа с фактическим значением ячейки
-        if (cells[row][col] == '0' + number) {
-            visible[row][col] = true; // Открываем ячейку
-            System.out.println("Правильное число! Ячейка открыта.");
-        } else {
-            System.out.println("Неправильное число!");
+            // Сравнение введенного числа с фактическим значением ячейки
+            if (cells[row][col] == '0' + number) {
+                visible[row][col] = true;
+                System.out.println("Правильное число! Ячейка открыта.");
+            } else {
+                System.out.println("Неправильное число!");
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Ошибка ввода: введите целое число.");
+            scanner.next(); // Очистка неверного ввода
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Произошла непредвиденная ошибка: " + e.getMessage());
         }
     }
 
