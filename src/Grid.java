@@ -5,6 +5,7 @@ class Grid {
     private char[][] cells = new char[SIZE][SIZE];
     private boolean[][] visible = new boolean[SIZE][SIZE];
     private Random random = new Random();
+    private static int gridCount = 0; // Статическое поле для подсчета экземпляров Grid
 
     public Grid() {
         // Инициализация массива visible
@@ -13,6 +14,11 @@ class Grid {
                 visible[row][col] = true; // Сначала все ячейки видимые
             }
         }
+        gridCount++;
+    }
+
+    public static int getGridCount() { // Статический метод для получения количества экземпляров Grid
+        return gridCount;
     }
 
     public void initializeGrid() {
@@ -38,7 +44,7 @@ class Grid {
 
     public void hideNumbers(int row) {
         int hiddenCount = 0;
-        while (hiddenCount < 4) { // Скрываем 4 числа
+        while (hiddenCount < 1) { // Скрываем 4 числа
             int col = random.nextInt(SIZE); // Генерируем случайный индекс колонки
             if (visible[row][col]) { // Проверяем, чтобы не скрыть уже скрытое
                 visible[row][col] = false; // Скрыть это число

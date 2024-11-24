@@ -17,6 +17,8 @@ public class main {
         long startTime = System.currentTimeMillis(); // Запоминаем время начала
         player.play(startTime);
 
+        System.out.println("Общее количество созданных экземпляров Grid: " + Grid.getGridCount()); // Выводим количество экземпляров Grid
+
         scanner.close();
     }
 }
