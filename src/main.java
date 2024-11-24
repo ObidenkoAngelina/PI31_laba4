@@ -3,9 +3,11 @@ import java.util.Scanner;
 public class main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        StringHelper stringHelper = new StringHelper();
         try {
             System.out.println("Введите имя игрока: ");
             String playerName = scanner.nextLine();
+            playerName = stringHelper.cleanAndFormat(playerName);
 
             Grid dynamicGrid = new Grid(); // Создание одного объекта Grid
             dynamicGrid.initializeGrid(); // Инициализация сетки
