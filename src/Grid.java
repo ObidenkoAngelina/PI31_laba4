@@ -7,6 +7,8 @@ class Grid {
     private boolean[][] visible = new boolean[SIZE][SIZE];
     private Random random = new Random();
     private static int gridCount = 0; // Статическое поле для подсчета экземпляров Grid
+    private Move[] moves; // Массив для хранения ходов
+    private int moveCount; // Счетчик ходов
 
     public Grid() {
         // Инициализация массива visible
@@ -16,6 +18,8 @@ class Grid {
             }
         }
         gridCount++;
+        moves = new Move[SIZE * SIZE]; // Максимальное количество ходов
+        moveCount = 0; // Изначально 0 ходов
     }
 
     public static int getGridCount() { // Статический метод для получения количества экземпляров Grid
@@ -102,12 +106,16 @@ class Grid {
             }
 
             // Сравнение введенного числа с фактическим значением ячейки
-            if (cells[row][col] == '0' + number) {
+            boolean isCorrect = cells[row][col] == '0' + number;
+            if (isCorrect) {
                 visible[row][col] = true;
                 System.out.println("Правильное число! Ячейка открыта.");
             } else {
                 System.out.println("Неправильное число!");
             }
+
+            // Сохранение хода
+            moves[moveCount++] = new Move(row, col, isCorrect);
         } catch (InputMismatchException e) {
             System.out.println("Ошибка ввода: введите целое число.");
             scanner.next(); // Очистка неверного ввода
@@ -116,6 +124,22 @@ class Grid {
         } catch (Exception e) {
             System.out.println("Произошла непредвиденная ошибка: " + e.getMessage());
         }
+    }
+
+    public void printResults() {
+        int correctMoves = 0;
+        int incorrectMoves = 0;
+
+        for (int i = 0; i < moveCount; i++) {
+            if (moves[i].isCorrect) {
+                correctMoves++;
+            } else {
+                incorrectMoves++;
+            }
+        }
+
+        System.out.println("Количество правильных ходов: " + correctMoves);
+        System.out.println("Количество неправильных ходов: " + incorrectMoves);
     }
 
     public boolean allCellsVisible() {

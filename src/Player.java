@@ -22,6 +22,8 @@ class Player {
         } else {
             System.out.println("Все ячейки открыты! Игрок " + name + " победил!"); // Сообщение о победе
         }
+        // Печать результатов
+        grid.printResults();
         scanner.close();
     }
 
