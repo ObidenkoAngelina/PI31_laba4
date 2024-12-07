@@ -3,7 +3,7 @@ import java.util.Scanner;
 import java.util.InputMismatchException;
 class Grid {
     public static final int SIZE = 9;
-    private char[][] cells = new char[SIZE][SIZE];
+    protected char[][] cells = new char[SIZE][SIZE];
     private boolean[][] visible = new boolean[SIZE][SIZE];
     private Random random = new Random();
     private static int gridCount = 0; // Статическое поле для подсчета экземпляров Grid
@@ -26,7 +26,7 @@ class Grid {
         return gridCount;
     }
 
-    public void initializeGrid() {
+    protected void initializeGrid()  {
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
                 // Определяем начальное значение для каждой строки
