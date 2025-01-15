@@ -26,7 +26,7 @@ class Grid {
         return gridCount;
     }
 
-    protected void initializeGrid()  {
+    protected void initializeGrid() {
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
                 // Определяем начальное значение для каждой строки
@@ -49,7 +49,7 @@ class Grid {
 
     public void hideNumbers(int row) {
         int hiddenCount = 0;
-        while (hiddenCount < 1) { // Скрываем 4 числа
+        while (hiddenCount < 1) { // Скрываем 1 число
             int col = random.nextInt(SIZE); // Генерируем случайный индекс колонки
             if (visible[row][col]) { // Проверяем, чтобы не скрыть уже скрытое
                 visible[row][col] = false; // Скрыть это число
