@@ -153,3 +153,4 @@ class Grid {
         return true; // Все ячейки открыты
     }
 }
+
