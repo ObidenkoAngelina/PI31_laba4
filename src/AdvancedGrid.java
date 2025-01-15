@@ -1,16 +1,12 @@
 class AdvancedGrid extends Grid {
-
-    // Перегруженный метод printGrid, который добавляет дополнительную информацию
+    // Перегруженный метод printGrid с дополнительной информацией
     public void printGrid(String additionalInfo) {
-        // Вызов базового метода printGrid без параметров
-        super.printGrid();
-        // Вывод дополнительной информации
+        super.printGrid(); // Вызов базового метода printGrid
         System.out.println("Дополнительная информация: " + additionalInfo);
     }
 
     // Перегруженный метод printGrid без параметров
     public void printGrid() {
-        // Просто вызывает базовый метод
-        super.printGrid();
+        super.printGrid(); // Просто вызывает базовый метод
     }
 }

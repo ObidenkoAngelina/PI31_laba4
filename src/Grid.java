@@ -1,22 +1,14 @@
 import java.util.Random;
 import java.util.Scanner;
 import java.util.InputMismatchException;
-class Grid {
-    public static final int SIZE = 9;
-    protected char[][] cells = new char[SIZE][SIZE];
-    private boolean[][] visible = new boolean[SIZE][SIZE];
+class Grid extends AbstractGrid {
     private Random random = new Random();
     private static int gridCount = 0; // Статическое поле для подсчета экземпляров Grid
     private Move[] moves; // Массив для хранения ходов
     private int moveCount; // Счетчик ходов
 
     public Grid() {
-        // Инициализация массива visible
-        for (int row = 0; row < SIZE; row++) {
-            for (int col = 0; col < SIZE; col++) {
-                visible[row][col] = true; // Сначала все ячейки видимые
-            }
-        }
+        super(); // Вызов конструктора родительского класса
         gridCount++;
         moves = new Move[SIZE * SIZE]; // Максимальное количество ходов
         moveCount = 0; // Изначально 0 ходов
@@ -26,7 +18,8 @@ class Grid {
         return gridCount;
     }
 
-    protected void initializeGrid() {
+    @Override
+    public void initializeGrid() {
         for (int row = 0; row < SIZE; row++) {
             for (int col = 0; col < SIZE; col++) {
                 // Определяем начальное значение для каждой строки
@@ -47,6 +40,7 @@ class Grid {
         }
     }
 
+    @Override
     public void hideNumbers(int row) {
         int hiddenCount = 0;
         while (hiddenCount < 1) { // Скрываем 1 число
@@ -58,6 +52,7 @@ class Grid {
         }
     }
 
+    @Override
     public void printGrid() {
         System.out.println("+---+---+---+---+---+---+---+---+---+");
         for (int row = 0; row < SIZE; row++) {
