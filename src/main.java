@@ -8,7 +8,7 @@ public class main {
             System.out.println("Введите имя игрока: ");
             String playerName = scanner.nextLine();
             playerName = stringHelper.cleanAndFormat(playerName);
-
+            Grid originalGrid = new Grid();
             AdvancedGrid dynamicGrid = new AdvancedGrid(); // Создание объекта AdvancedGrid
             dynamicGrid.initializeGrid(); // Инициализация сетки
             for (int row = 0; row < Grid.SIZE; row++) {

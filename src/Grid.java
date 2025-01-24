@@ -147,5 +147,19 @@ class Grid extends AbstractGrid {
         }
         return true; // Все ячейки открыты
     }
+
+    // Метод для поиска числа в сетке
+    public boolean searchNumber(int number) {
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
+                if (cells[row][col] == '0' + number) { // Преобразуем число в символ для сравнения
+                    System.out.println("Число " + number + " найдено в ячейке (" + row + ", " + col + ").");
+                    return true; // Число найдено
+                }
+            }
+        }
+        System.out.println("Число " + number + " не найдено.");
+        return false; // Число не найдено
+    }
 }
 
